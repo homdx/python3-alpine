@@ -132,6 +132,8 @@ RUN set -ex; \
 	rm -f get-pip.py
 
 RUN apk add --no-cache --virtual .build-deps  \
+                gfortran \
+                openblas-dev \
                 bzip2-dev \
                 coreutils \
                 dpkg-dev dpkg \
@@ -156,6 +158,7 @@ RUN apk add --no-cache --virtual .build-deps  \
                 xz-dev \
                 zlib-dev \
 # add build deps before removing fetch deps in case there's overlap
-        && pip install tornado==4.5.2 websocket-client pytest numpy pandas scipy \
-        && apk del .build-deps
+  && ln -s /usr/include/locale.h /usr/include/xlocale.h \
+        && pip install cython tornado==4.5.2 websocket-client pytest numpy pandas scipy \
+        && apk del .build-deps && pip list
 #CMD ["python3"]
