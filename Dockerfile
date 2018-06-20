@@ -131,5 +131,31 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
-RUN pip install tornado websocket-client pytest numpy pandas scipy && pip list
+RUN apk add --no-cache --virtual .build-deps  \
+                bzip2-dev \
+                coreutils \
+                dpkg-dev dpkg \
+                expat-dev \
+                gcc \
+                gdbm-dev \
+                libc-dev \
+                libffi-dev \
+                libnsl-dev \
+                libressl \
+                libressl-dev \
+                libtirpc-dev \
+                linux-headers \
+                make \
+                ncurses-dev \
+                pax-utils \
+                readline-dev \
+                sqlite-dev \
+                tcl-dev \
+                tk \
+                tk-dev \
+                xz-dev \
+                zlib-dev \
+# add build deps before removing fetch deps in case there's overlap
+        && pip install tornado==4.5.2 websocket-client pytest numpy pandas scipy \
+        && apk del .build-deps
 #CMD ["python3"]
