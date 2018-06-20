@@ -131,4 +131,5 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
+RUN pip install tornado websocket-client pytest numpy pandas scipy && pip list
 #CMD ["python3"]
