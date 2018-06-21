@@ -133,6 +133,7 @@ RUN set -ex; \
 
 RUN apk add --no-cache --virtual .build-deps  \
                 gfortran \
+		build-base \
                 openblas-dev \
                 bzip2-dev \
                 coreutils \
